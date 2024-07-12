@@ -1,5 +1,5 @@
+const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
-const { post } = require("../routes");
 const Schema = mongoose.Schema;
 const  {ObjectId} = mongoose.Schema;
 
@@ -92,7 +92,7 @@ const UserModel = new Schema(
                     text:true
                 },
                 createdAt:{
-                    type:date,
+                    type:Date,
                     require:true
                 }
             }
@@ -140,10 +140,10 @@ const UserModel = new Schema(
             {
                 post:{
                     type:ObjectId,
-                    ref:post
+                    ref:"post"
                 },
                 savedAt:{
-                    type:date,
+                    type:Date,
                     require:true
                 }
             }
@@ -154,6 +154,6 @@ const UserModel = new Schema(
     {
         timestamps:true
     }
-);
+)
 
 module.exports = mongoose.model('usermodel',UserModel);

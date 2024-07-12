@@ -1,9 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const {newUser} = require("../../controller/usercontroller")
 
-router.get('/',(req,res)=>{
-    res.send("this is from backend")
-   console.log("backend api inside");
-})
+router.post('/',newUser)
 
 module.exports = router 
