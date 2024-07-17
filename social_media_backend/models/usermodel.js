@@ -47,8 +47,16 @@ const UserModel = new Schema(
             type:String,
             default: ''
         },
-        date_of_birth:{
-            type:Date,
+        birth_day:{
+            type:String,
+            require:true,
+        },
+        birth_month:{
+            type:String,
+            require:true,
+        },
+        birth_year:{
+            type:String,
             require:true,
         },
         gender:{
