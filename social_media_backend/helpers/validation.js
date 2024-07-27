@@ -1,4 +1,4 @@
-const user = require("../models/userModel")
+const User = require ("../models/userModel")
 
 exports.validateEmail =(email)=>{
 
@@ -11,4 +11,20 @@ exports.validateLength= (text,min,max)=>{
     }else{
         return true
     }
-}
+};
+
+exports.validateusername = async (username)=>{
+    let istrue = false
+
+    do {
+        let user = await User.findOne({username})
+        if(user){
+            username += (+ new Date() * Math.random()).toString().substring(0,1)
+            istrue= true
+        }else{
+            istrue= false  
+        }
+        
+    } while (istrue);
+    return(username) 
+};

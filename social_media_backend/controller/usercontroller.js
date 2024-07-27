@@ -1,5 +1,5 @@
 const Users = require ("../models/userModel");
-const {validateEmail, validateLength} = require("../helpers/validation");
+const {validateEmail, validateLength, validateusername} = require("../helpers/validation");
 const bcrypt = require('bcrypt');
 
 
@@ -8,7 +8,6 @@ exports.newUser = async (req,res) => {
     const {
         first_name,
         last_name,
-        user_name,
         email,
         password,
         birth_day,
@@ -41,18 +40,27 @@ exports.newUser = async (req,res) => {
             massage:"Last name should be Minimum 3 & Maximum 15 Charecters"
         })
     }
+    if(!validateLength(password,6,40)){
+        return res.status(400).json({
+            massage:"Password should be Minimum 6 Charecters"
+        })
+    }
 
-    const match = await bcrypt.hash(password,10);
-    console.log(match);
+    // bcrypt password
+    const Hashmatch = await bcrypt.hash(password,10);
+    
+    // validate UserName
+    const Tempusename = first_name + last_name ;
+    const finalusername = await validateusername(Tempusename);
 
-    return
+
     
     const user = await new Users({
         first_name,
         last_name,
-        user_name,
+        username:finalusername,
         email,
-        password,
+        password:Hashmatch,
         birth_day,
         birth_month,
         birth_year,

@@ -19,7 +19,7 @@ const UserModel = new Schema(
             trim:true,
             text:true,
         },
-        user_name:{
+        username:{
             type:String,
             require:true,
             unique:true,
