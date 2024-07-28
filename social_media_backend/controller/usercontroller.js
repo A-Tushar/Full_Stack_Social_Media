@@ -1,6 +1,7 @@
 const Users = require ("../models/userModel");
 const {validateEmail, validateLength, validateusername} = require("../helpers/validation");
 const bcrypt = require('bcrypt');
+const { jwtoken } = require("../helpers/token");
 
 
 exports.newUser = async (req,res) => {
@@ -68,6 +69,9 @@ exports.newUser = async (req,res) => {
         verify
     }).save()
     res.send(user);
+    
+    const emailtoken = jwtoken({id: user._id.toString()},"30m")
+    console.log(emailtoken);
 
     res.send(req.body)
 
