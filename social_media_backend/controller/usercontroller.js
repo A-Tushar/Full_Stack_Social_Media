@@ -77,7 +77,7 @@ exports.newUser = async (req,res) => {
 
  } catch (error) {
     res.status(404).json({
-        massage:"can't creat new user"
+        massage:"can't create new user"
     })
  }
 };
